@@ -15,3 +15,9 @@ application {
     // Define the main class for the application.
     mainClass = 'com.github.mrsarm.nqueen.app.App'
 }
+
+tasks.withType(Tar) {
+    compression = Compression.GZIP
+    archiveExtension = 'tar.gz'
+}
+
