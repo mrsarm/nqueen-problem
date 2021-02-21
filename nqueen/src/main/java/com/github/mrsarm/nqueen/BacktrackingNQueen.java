@@ -26,12 +26,12 @@ import java.util.Optional;
 public class BacktrackingNQueen implements NQueen {
 
     private int size;
-    private int board[][];
+    private boolean board[][];
     private boolean solved, result;
 
     public BacktrackingNQueen() {
         this.size = 8;
-        this.board = new int[this.size][this.size];
+        this.board = new boolean[this.size][this.size];
     }
 
     public BacktrackingNQueen(int size) {
@@ -41,7 +41,7 @@ public class BacktrackingNQueen implements NQueen {
                 "BacktrackingNQueen size must be higher than 0");
         }
         this.size = size;
-        this.board = new int[this.size][this.size];
+        this.board = new boolean[this.size][this.size];
     }
 
     /* A utility function to check if a queen can 
@@ -49,22 +49,22 @@ public class BacktrackingNQueen implements NQueen {
     function is called when "col" queens are already 
     placeed in columns from 0 to col -1. So we need 
     to check only left side for attacking queens */
-    boolean isSafe(int board[][], int row, int col) {
+    boolean isSafe(boolean board[][], int row, int col) {
         int i, j;
 
         /* Check this row on left side */
         for (i = 0; i < col; i++)
-            if (board[row][i] == 1)
+            if (board[row][i])
                 return false;
 
         /* Check upper diagonal on left side */
         for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
-            if (board[i][j] == 1)
+            if (board[i][j])
                 return false;
 
         /* Check lower diagonal on left side */
         for (i = row, j = col; j >= 0 && i < size; i++, j--)
-            if (board[i][j] == 1)
+            if (board[i][j])
                 return false;
 
         return true;
@@ -72,7 +72,7 @@ public class BacktrackingNQueen implements NQueen {
 
     /* A recursive utility function to solve N 
     Queen problem */
-    boolean solveNQUtil(int board[][], int col) {
+    boolean solveNQUtil(boolean board[][], int col) {
 		/* base case: If all queens are placed 
 		then return true */
         if (col >= size)
@@ -85,7 +85,7 @@ public class BacktrackingNQueen implements NQueen {
 			board[i][col] */
             if (isSafe(board, i, col)) {
                 /* Place this queen in board[i][col] */
-                board[i][col] = 1;
+                board[i][col] = true;
 
                 /* recur to place rest of the queens */
                 if (solveNQUtil(board, col + 1) == true)
@@ -94,7 +94,7 @@ public class BacktrackingNQueen implements NQueen {
 				/* If placing queen in board[i][col] 
 				doesn't lead to a solution then 
 				remove queen from board[i][col] */
-                board[i][col] = 0; // BACKTRACK 
+                board[i][col] = false; // BACKTRACK
             }
         } 
 
@@ -112,7 +112,7 @@ public class BacktrackingNQueen implements NQueen {
     solutions, this function prints one of the 
     feasible solutions.*/
     @Override
-    public Optional<int[][]> solve() {
+    public Optional<boolean[][]> solve() {
         if (!solved) {
             result = solveNQUtil(board, 0);
             solved = true;

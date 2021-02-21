@@ -11,11 +11,12 @@ import com.github.mrsarm.nqueen.NQueen;
 public class App {
     public static void main(String[] args) {
         NQueen nqueen = new BacktrackingNQueen(parseSize(args));
-        Optional<int[][]> result = nqueen.solve();
+        Optional<boolean[][]> result = nqueen.solve();
         if(result.isPresent()) {
             System.out.println(nqueen.boardToString());
+            //System.out.println(nqueen.boardToString("\uD83D\uDC51", "\uD83D\uDD32", "", "\n")); //-> 👑 Unicode queens
         } else {
-            System.err.println("Solution does not exist");
+            System.err.println("Solution does not exist.");
         }
     }
 

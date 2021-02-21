@@ -8,59 +8,59 @@ public class BacktrackingNQueenTest {
 
     @Test public void test1Queen() {
         NQueen nqueen = new BacktrackingNQueen(1);
-        Optional<int[][]> result = nqueen.solve();
+        Optional<boolean[][]> result = nqueen.solve();
         assertTrue(result.isPresent());
-        int[][] board = result.get();   // it fails if there are no results
+        boolean[][] board = result.get();   // it fails if there are no results
         assertArrayEquals(
             board,
-            new int[][]{
-                {1},
+            new boolean[][]{
+                {true},
             });
     }
 
     @Test public void test2QueenNoResult() {
         NQueen nqueen = new BacktrackingNQueen(2);
-        Optional<int[][]> result = nqueen.solve();
+        Optional<boolean[][]> result = nqueen.solve();
         assertFalse(result.isPresent());
     }
 
     @Test public void test3QueenNoResult() {
         NQueen nqueen = new BacktrackingNQueen(3);
-        Optional<int[][]> result = nqueen.solve();
+        Optional<boolean[][]> result = nqueen.solve();
         assertFalse(result.isPresent());
     }
 
     @Test public void test4Queen() {
         NQueen nqueen = new BacktrackingNQueen(4);
-        Optional<int[][]> result = nqueen.solve();
+        Optional<boolean[][]> result = nqueen.solve();
         assertTrue(result.isPresent());
-        int[][] board = result.get();   // it fails if there are no results
+        boolean[][] board = result.get();   // it fails if there are no results
         assertArrayEquals(
             board,
-            new int[][]{
-                {0, 0, 1, 0},
-                {1, 0, 0, 0},
-                {0, 0, 0, 1},
-                {0, 1, 0, 0},
+            new boolean[][]{
+                {false, false, true , false},
+                {true , false, false, false},
+                {false, false, false, true },
+                {false, true , false, false},
             });
     }
 
     @Test public void test8Queen() {
         NQueen nqueen = new BacktrackingNQueen();
-        Optional<int[][]> result = nqueen.solve();
+        Optional<boolean[][]> result = nqueen.solve();
         assertTrue(result.isPresent());
-        int[][] board = result.get();   // it fails if there are no results
+        boolean[][] board = result.get();   // it fails if there are no results
         assertArrayEquals(
             board,
-            new int[][]{
-                {1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0},
-                {0, 0, 0, 0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 1},
-                {0, 1, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0, 0, 0, 0},
+            new boolean[][]{
+                {true , false, false, false, false, false, false, false},
+                {false, false, false, false, false, false, true , false},
+                {false, false, false, false, true , false, false, false},
+                {false, false, false, false, false, false, false, true },
+                {false, true , false, false, false, false, false, false},
+                {false, false, false, true , false, false, false, false},
+                {false, false, false, false, false, true , false, false},
+                {false, false, true , false, false, false, false, false},
             });
     }
 
@@ -78,8 +78,8 @@ public class BacktrackingNQueenTest {
 
     @Test public void testCall2TimesGetSameComputedResult() {
         NQueen nqueen = new BacktrackingNQueen(4);
-        Optional<int[][]> result1 = nqueen.solve();
-        Optional<int[][]> result2 = nqueen.solve();
+        Optional<boolean[][]> result1 = nqueen.solve();
+        Optional<boolean[][]> result2 = nqueen.solve();
         // Same object
         assertTrue(result1.get() == result2.get());
         // Same result (despite same object, the values
