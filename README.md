@@ -15,8 +15,10 @@ to solve the N-Queen problem.
 Run it
 ------
 
-Want to run it? in a _*nix_ environment with Java 8+ installed
-two convenient scripts  are placed at the root of the source code.
+You can use Gradle to build and run the app
+(see [Build and run](#build-and-run)), but in _*nix_
+environments with Java 8+ installed two convenient scripts
+are placed at the root of the source code.
 The first one is needed to execute only once, it compiles,
 executes the tests, assembles and unpacks the distributable:
 
